@@ -1,0 +1,6 @@
+.cache/
+.ccls-cache/
+build/
+subprojects/*/
+
+compile_commands.json
