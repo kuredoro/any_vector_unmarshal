@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "type_name.hpp"
-#include "avu_fwd.hpp"
+#include "avu/type_name.hpp"
+#include "avu/avu_fwd.hpp"
 
 namespace avu
 {

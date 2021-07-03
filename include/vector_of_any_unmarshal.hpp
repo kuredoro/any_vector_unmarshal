@@ -4,8 +4,8 @@
 #include <vector>
 #include <boost/any.hpp>
 
-#include "type_name.hpp"
-#include "avu_fwd.hpp"
+#include "avu/type_name.hpp"
+#include "avu/avu_fwd.hpp"
 
 namespace avu
 {
@@ -60,4 +60,4 @@ inline std::string blob_item_type_name(boost::any& item)
 
 } // namespace avu
 
-#include "avu.hpp"
+#include "avu/avu.hpp"
