@@ -63,16 +63,23 @@ bool unmarshal_impl(std::string& msg, Blob& blob)
 }
 
 // TODO: If Required not specified, default to sizeof...(Args)
-template <size_t Required, class Blob, class... Args>
+template <int Required = -1, class Blob, class... Args>
 std::string unmarshal(Blob& blob, Args&... args)
 {
-    static_assert(Required <= sizeof...(Args), "Required argument count is bigger than the number of provided arguments");
+    static_assert(Required < 0 || Required <= sizeof...(Args), "Required argument count is bigger than the number of provided arguments");
 
-    if (blob_size(blob) < Required)
+    if (Required >= 0 && blob_size(blob) < (size_t)Required)
     {
         return "not enough arguments provided: got "
             + std::to_string(blob_size(blob)) + ", want at least "
             + std::to_string(Required);
+    }
+
+    if (Required < 0 && blob_size(blob) < sizeof...(Args))
+    {
+        return "not enough arguments provided: got "
+            + std::to_string(blob_size(blob)) + ", want at least "
+            + std::to_string(sizeof...(Args));
     }
 
     std::string msg;
