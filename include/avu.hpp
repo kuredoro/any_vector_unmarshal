@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 
 #include "type_name.hpp"
@@ -20,8 +19,6 @@ void cast_error_message(std::string& msg, BlobItem& item)
 template <size_t ArgumentIndex, class BlobItem, class Arg>
 bool unmarshal_one(std::string& msg, BlobItem& item, Arg& x)
 {
-    std::cout << "unmarshal_one<" << ArgumentIndex << ">\n";
-
     if (!can_cast<Arg>(item))
     {
         cast_error_message<ArgumentIndex, Arg>(msg, item);
@@ -44,7 +41,6 @@ bool unmarshal_one(std::string& msg, BlobItem& item, Arg& x)
 template <size_t Pos, class Blob, class Arg, class... Args>
 bool unmarshal_impl(std::string& msg, Blob& blob, Arg& x, Args&... rest)
 {
-    std::cout << "unmarshal_impl<" << Pos << ">\n";
     // We assume that blob was checked to contain at least Required number of
     // elements. Hence, if blob has run out of arguments, it means we're done.
     if (Pos >= blob_size(blob))

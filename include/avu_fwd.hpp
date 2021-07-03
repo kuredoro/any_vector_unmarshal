@@ -9,6 +9,9 @@ namespace avu
 template <class T>
 size_t blob_size(T&);
 
+template <class T>
+size_t blob_size(const T&);
+
 // -----------------------------------------------------------------------------
 
 template <size_t Pos = 0, class Blob, class Arg, class... Args>
@@ -21,6 +24,8 @@ bool unmarshal_impl(std::string& msg, Blob& blob);
 
 template <class To, class From>
 bool can_cast(From&);
+
+// -----------------------------------------------------------------------------
 
 template <class To, class From>
 To cast(From&);

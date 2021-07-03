@@ -11,17 +11,18 @@ namespace avu
 {
 
 template <class T>
+inline size_t blob_size(const std::vector<T>& vec) { return vec.size(); }
+
+template <class T>
 inline size_t blob_size(std::vector<T>& vec) { return vec.size(); }
 
 // -----------------------------------------------------------------------------
 
 template <class To>
-To cast(boost::any& x)
+bool can_cast(const boost::any& x)
 {
-    return boost::any_cast<To>(x);
+    return true;
 }
-
-// -----------------------------------------------------------------------------
 
 template <class To>
 bool can_cast(boost::any& x)
@@ -31,6 +32,26 @@ bool can_cast(boost::any& x)
 
 // -----------------------------------------------------------------------------
 
+template <class To>
+To cast(const boost::any& x)
+{
+    return boost::any_cast<To>(x);
+}
+
+template <class To>
+To cast(boost::any& x)
+{
+    return boost::any_cast<To>(x);
+}
+
+// -----------------------------------------------------------------------------
+
+template <>
+inline std::string blob_item_type_name(const boost::any& item)
+{
+    return type_name(item.type());
+}
+
 template <>
 inline std::string blob_item_type_name(boost::any& item)
 {
@@ -38,3 +59,5 @@ inline std::string blob_item_type_name(boost::any& item)
 }
 
 } // namespace avu
+
+#include "avu.hpp"
